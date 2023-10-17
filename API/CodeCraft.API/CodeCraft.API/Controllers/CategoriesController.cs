@@ -18,7 +18,7 @@ namespace CodeCraft.API.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        //
+        // POST: localhost:XXXX/api/categories
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCateogoryRequestDTO request)
         {
@@ -38,6 +38,27 @@ namespace CodeCraft.API.Controllers
                 Name = category.Name,
                 UrlHandle = category.UrlHandle,
             };
+
+            return Ok(response);
+        }
+
+        // GET: localhost:XXXX/api/categories
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await categoryRepository.GetAllAsync();
+
+            //Domain Model to DTO
+            var response = new List<CategoryDTO>();
+            foreach (var category in categories)
+            {
+                response.Add(new CategoryDTO
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle,
+                });
+            }
 
             return Ok(response);
         }

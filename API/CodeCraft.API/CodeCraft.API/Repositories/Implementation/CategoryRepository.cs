@@ -1,6 +1,7 @@
 ﻿using CodeCraft.API.Data;
 using CodeCraft.API.Models.Domain;
 using CodeCraft.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeCraft.API.Repositories.Implementation
 {
@@ -19,6 +20,11 @@ namespace CodeCraft.API.Repositories.Implementation
             await dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await dbContext.Categories.ToListAsync();
         }
     }
 }
