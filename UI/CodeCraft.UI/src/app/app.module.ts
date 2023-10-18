@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CategoryListComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule,

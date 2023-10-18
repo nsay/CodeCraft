@@ -20,7 +20,7 @@ namespace CodeCraft.API.Controllers
 
         // POST: localhost:XXXX/api/categories
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCateogoryRequestDTO request)
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCateogoryRequestDTO request)
         {
             // Map DTO to Domain Model
             var category = new Category
@@ -59,6 +59,29 @@ namespace CodeCraft.API.Controllers
                     UrlHandle = category.UrlHandle,
                 });
             }
+
+            return Ok(response);
+        }
+
+        // GET: localhost:XXXX/api/categories/{id}
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetCategoryById([FromRoute] Guid id)
+        {
+            var category = await categoryRepository.GetById(id);
+
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            //convert to DTO
+            var response = new CategoryDTO 
+            { 
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle,
+            };
 
             return Ok(response);
         }
